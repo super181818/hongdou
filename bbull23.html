@@ -3,13 +3,14 @@
     <meta charset="utf-8">
     <base href="http://xcwgf3.oss-cn-hangzhou.aliyuncs.com"/>
     <link rel="icon" href="data:image/ico;base64,aWNv">
-    <meta name="viewport"  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="msapplication-tap-highlight" content="no"/>
     <meta http-equiv="Pragma" content="public"/>
     <meta http-equiv="Cache-Control" content="public"/>
-    <title>17人牛牛</title>
-   <script type="text/javascript">
+    <title>23人牛牛</title>
+    <script type="text/javascript">
                 var _thost = 'http://' + window.location.host;
         var pathArr = window.location.pathname.split("/");
         if(pathArr.length==3 && pathArr[1] != ""){
@@ -23,13 +24,11 @@
         document.write('<script type="text/javascript" src="' + _thost + '/js/config.js?v=1' + _tt + '"> <\/script>');
     </script>    
     <link rel="stylesheet" href="/fiesc/css/loading_new.css">
-    <link rel="stylesheet" type="text/css" href="/fiesc/css/bull17_cn.css?v=21">
+    <link rel="stylesheet" type="text/css" href="/fiesc/css/bull23_encode.css?v=2023062415120033">
     <link rel="stylesheet" type="text/css" href="/fiesc/css/alertbox.css">
     <link rel="stylesheet" type="text/css" href="/fiesc/css/ncomm.css">
 
     <script type="text/javascript" src="/fiesc/js/fastclick.js"></script>
-
- 
     <script type="text/javascript" src="/js/load.js?v=11101"></script>
 
     <script type="text/javascript">
@@ -1296,7 +1295,10 @@
         }
 
         .zhuonuo15,
-        .zhuonuo17 {
+        .zhuonuo17,
+        .zhuonuo19,
+        .zhuonuo21,
+        .zhuonuo23{
             position: fixed;
             width: .6rem;
             z-index: 89;
@@ -1335,7 +1337,10 @@
 
         /*自动准备*/
         .auto-ready15,
-        .auto-ready17 {
+        .auto-ready17,
+        .auto-ready19,
+        .auto-ready21,
+        .auto-ready23 {
             position: fixed;
             width: .6rem;
             z-index: 89;
@@ -1348,7 +1353,10 @@
         .auto-ready10 img,
         .auto-ready13 img,
         .auto-ready15 img,
-        .auto-ready17 img {
+        .auto-ready17 img,
+        .auto-ready19 img,
+        .auto-ready21 img,
+        .auto-ready23 img {
             width: 100%;
         }
 
@@ -1469,10 +1477,7 @@
 <div class="main" id="app-main"
      style="position: relative; width: 100%;margin: 0 auto; background: #fff; display: none;">
 
-    <div v-if="globalData.maxCount>10&&globalData.maxCount<15" class="top13">
-        <div class="top-item13"><span>{{game.round}}</span>/<span>{{game.total_num}}</span>局</div>
-        <div class="points13">底分：<span>{{base_score}}</span>分</div>
-    </div>
+
 
     <div v-if="globalData.maxCount>=15" class="top15 top-cont">
         <div class="top-item15"><span>{{game.round}}</span>/<span>{{game.total_num}}</span>局</div>
@@ -1482,38 +1487,16 @@
          :class="'zhuonuo'+globalData.maxCount" data-clipboard-action="copy" id="copy_btn" onclick="fuzhiMain.link()"/>
     <textarea id="room_str" readonly="readonly"></textarea>
 
-    <div v-if="globalData.maxCount<13" class="top flex-cont">
-        <div class="left" v-on:click="showIndividuality">
-            <!-- <div class="left" >防疫码-->
-            <img src="/fiesc/images/common/myText.png">
-            <span v-if='userData.individuality!==""'>{{userData.individuality}}</span>
-            <!--<span style="padding: 0 .05rem;text-align: center;">{{userData.card}}</span>-->
-        </div>
-        <div class="flex-item"><span>{{game.round}}</span>/<span>{{game.total_num}}</span>局</div>
-        <div class="right">
-            <div class="rules-focus"><span class="watch" v-on:click="showGuests"></span><span v-on:click="showGameRule"
-                                                                                              class="rules"></span><span
-                    v-on:click="showHomeAlert" class="return-index"></span></div>
-        </div>
-    </div>
-
-    <img v-if="globalData.maxCount<13" :src="globalData.fileUrl+'files/images/common/btn_qrcode.png'" onclick="makeQrCode()" style="position: absolute;bottom: .05rem; left: 0.66rem;width: .34rem;height: .34rem;text-align: center;line-height: .3744rem;z-index: 100;" />
-    <img v-if="globalData.maxCount>=13" :src="globalData.fileUrl+'files/images/common/btn_qrcode.png'" onclick="makeQrCode()" style="    position: absolute;bottom: 0.75vh;width: 4.5vh;height: 4.5vh;z-index: 100;right: 34.5vh;" />
-
-    <div v-if="globalData.maxCount<13" class="points">底分：<span>{{base_score}}</span>分</div>
-    <div v-if="globalData.maxCount<13" class="music" v-on:click="confirmAudioSetting">
-        <img v-if="editAudioInfo.backMusic==1" style="width: 0.34rem;height: 0.34rem;"
-             src="/fiesc/images/common/game-music01.png">
-        <img v-if="editAudioInfo.backMusic==0" style="width: 0.34rem;height: 0.34rem;"
-             src="/fiesc/images/common/game-music02.png">
-    </div>
+    <img v-if="globalData.maxCount>=13" :src="globalData.fileUrl+'files/images/common/btn_qrcode.png'"
+         onclick="makeQrCode()"
+         style="    position: absolute;bottom: 0.75vh;width: 4.5vh;height: 4.5vh;z-index: 100;right: 34.5vh;"/>
     <!--自动准备-->
     <div :class="'auto-ready'+globalData.maxCount" v-if="isWatching!=1" v-on:click="autoReady()">
         <img v-show="appData.isAutoReady==1" src="/files/images/common/ready_true2.png">
         <img v-show="appData.isAutoReady==0" src="/files/images/common/ready_false2.png">
     </div>
 
-    <div v-if="globalData.maxCount<13" class="chat" v-on:click="showMessage"></div>
+
     <!-- 观战功能 -->
     <img src="/fiesc/images/guest/is_watching.png"
          style="position: fixed;z-index: 90;width: 40%;left: 30%;top: 65.5%;" v-show="isWatching==1">
@@ -1561,12 +1544,14 @@
     </div>
 
     <div id="qrcode" style="display: none;position: fixed; top: 0;left: 0;width: 100%;height: 100%;z-index: 111">
-        <div style="background: rgba(0,0,0,0.5);position: fixed;top: 0;left: 0;width: 100%;height: 100%;" onclick="hideQrCode()"></div>
+        <div style="background: rgba(0,0,0,0.5);position: fixed;top: 0;left: 0;width: 100%;height: 100%;"
+             onclick="hideQrCode()"></div>
         <div style="position: relative;width: 64vw;height: 80vw;left: 50%;top: 50%;transform: translate(-50%, -50%);border: .0096rem solid #919191;-webkit-border-radius: .096rem;-moz-border-radius: .096rem;border-radius: .096rem;transition: display 1s;background-color: rgba(255,255,255,.2);">
             <div>
                 <span style="position:absolute;top: 0.1rem;left: 50%;transform: translateX(-50%); width: 70vw;text-align: center; color: #fff;font-size: 18px;">二维码</span>
                 <div id="divOne"></div>
-                <img id='imgOne' style="width: 50vw; height:50vw; box-sizing: border-box;position: absolute;overflow: scroll;background: #fff;border-radius: 4px;left: 50%;top: 48%;transform: translate(-50%,-50%);"/>
+                <img id='imgOne'
+                     style="width: 50vw; height:50vw; box-sizing: border-box;position: absolute;overflow: scroll;background: #fff;border-radius: 4px;left: 50%;top: 48%;transform: translate(-50%,-50%);"/>
                 <span style="position:absolute;bottom: 0.25rem;left: 50%;transform: translateX(-50%); width: 70vw;text-align: center; color: #fff;font-size: 16px;">长按二维码发送</span>
             </div>
         </div>
@@ -1842,14 +1827,16 @@
         <div class="alertTipText" style="font-size: .16rem;">{{alertTipText}}</div>
     </div>
 
-
     <div v-show="isShowApply" style="color: #000;">
         <div class="applyMask" style="width: 100%;height: 100%;position: fixed;background: #000;z-index: 111;"></div>
-        <div style="position: fixed;background: #fff;border-radius: 6px; top: 50%;left: 50%;z-index: 111;transform: translate(-50%,-50%); width: 76vw;" :style="appData.applyInfo.club_name?'height: 30vh':'height: 20vh'">
-            <img src="/files/images/common/close.png" style="position: absolute;right: -3vw;top: -2vh;width: 10vw;" @click="hall">
+        <div style="position: fixed;background: #fff;border-radius: 6px; top: 50%;left: 50%;z-index: 111;transform: translate(-50%,-50%); width: 76vw;"
+             :style="appData.applyInfo.club_name?'height: 30vh':'height: 20vh'">
+            <img src="/files/images/common/close.png" style="position: absolute;right: -3vw;top: -2vh;width: 10vw;"
+                 @click="hall">
             <div style="margin-top: 5vh;text-align: center;">你不是该俱乐部成员，无法加入房间</div>
             <div style="position: relative;height: 10vh;" v-if="appData.applyInfo.club_name">
-                <img :src="applyInfo.club_headimgurl" style="width: 12vw;position: absolute;left: 18vw;top: 50%;transform: translateY(-50%);">
+                <img :src="applyInfo.club_headimgurl"
+                     style="width: 12vw;position: absolute;left: 18vw;top: 50%;transform: translateY(-50%);">
                 <span style="position: absolute;left: 34vw;top: 50%;transform: translateY(-50%);">{{applyInfo.club_name}}</span>
             </div>
             <div style="text-align: center">是否申请加入俱乐部？</div>
@@ -1869,21 +1856,12 @@
     <!-- 游戏桌子 -->
     <div class="table" id="table" style="position: relative; width: 100%; height: 100%; z-index: 80; overflow: hidden;"
          v-on:click="confirmAudioSetting('1')">
-        <img v-if="globalData.maxCount==6" class="tableBack" src="/files/images/bull/table.jpg"
-             style="position: absolute;top:0;left: 0;width: 100vw;height: 100vh"/>
-        <img v-if="globalData.maxCount==10" class="tableBack" src="/files/images/bull/table.jpg"
-             style="position: absolute;top:0;left: 0;width: 100vw;height: 100vh"/>
-        <img v-if="globalData.maxCount==13" class="tableBack"
+        <img  class="tableBack"
              src="/files/images/nbull/table13.jpg"
              style="position: absolute;top:0;left: 0;width: 100vw;height: 100vh"/>
-        <img v-if="globalData.maxCount==15" class="tableBack"
-             src="/files/images/nbull/table13.jpg"
-             style="position: absolute;top:0;left: 0;width: 100vw;height: 100vh"/>
-        <img v-if="globalData.maxCount==17" class="tableBack"
-             src="/files/images/nbull/table13.jpg"
-             style="position: absolute;top:0;left: 0;width: 100vw;height: 100vh"/>
+        <img :src="'/platform/'+globalData.hallEname+'/hall-name.png'"
+             style="position: absolute;bottom:40%;left: 50%;transform: translateX(-50%);width: 2rem;"/>
 
-        <img :src="'/platform/'+globalData.hallEname+'/hall-name.png'" style="position: absolute;bottom:40%;left: 50%;transform: translateX(-50%);width: 2rem;" />
 
         <!-- 发牌 ||p.account_status==6||p.account_status==7 -->
         <div class="cardDeal">
@@ -1960,67 +1938,35 @@
                 </div>
             </div>
         </div>
-
-        <!-- game.cardDeal==-1&&p.account_status>1&&p.account_status!=6&&p.account_status!=7&&p.card.length>0-->
-        <div v-if="globalData.maxCount<10" class="cardOver"
-             style="position: absolute; top: 19.5%; left: 19%; width: 62%; height: 55.5%; overflow:hidden;">
-            <div v-for="p in player" v-if="p.num!=1" v-show="p.account_status>=8&&p.card_open.length>0&&game.show_card">
-                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '11'" style="z-index: 14;">
-                    <div class="face front"></div>
-                    <div class="face back" v-bind:class="'card' + p.card_open[4]"></div>
-                </div>
-
-                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '21'" style="z-index: 13">
-                    <div class="face front"></div>
-                    <div class="face back" v-bind:class="'card' + p.card_open[3]"></div>
-                </div>
-
-                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '31'" style="z-index: 12">
-                    <div class="face front"></div>
-                    <div class="face back" v-bind:class="'card' + p.card_open[2]"></div>
-                </div>
-
-                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '41'" style="z-index: 11">
-                    <div class="face front"></div>
-                    <div class="face back" v-bind:class="'card' + p.card_open[1]"></div>
-                </div>
-
-                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '51'" style="z-index: 10">
-                    <div class="face front"></div>
-                    <div class="face back" v-bind:class="'card' + p.card_open[0]"></div>
-                </div>
-            </div>
-        </div>
-        <div v-if="globalData.maxCount>6" class="cardOver"
+       <div class="cardOver"
              style="position: absolute; width: 100%; height: 100%; overflow:hidden;">
             <div v-for="p in player" v-if="p.num!=1" v-show="p.account_status>=8&&p.card_open.length>0&&game.show_card">
-                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '11'" style="z-index: 14;">
+                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '_11'" style="z-index: 14;">
                     <div class="face front"></div>
                     <div class="face back" v-bind:class="'card' + p.card_open[4]"></div>
                 </div>
 
-                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '21'" style="z-index: 13">
+                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '_21'" style="z-index: 13">
                     <div class="face front"></div>
                     <div class="face back" v-bind:class="'card' + p.card_open[3]"></div>
                 </div>
 
-                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '31'" style="z-index: 12">
+                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '_31'" style="z-index: 12">
                     <div class="face front"></div>
                     <div class="face back" v-bind:class="'card' + p.card_open[2]"></div>
                 </div>
 
-                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '41'" style="z-index: 11">
+                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '_41'" style="z-index: 11">
                     <div class="face front"></div>
                     <div class="face back" v-bind:class="'card' + p.card_open[1]"></div>
                 </div>
 
-                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '51'" style="z-index: 10">
+                <div class="cards" v-bind:class="'cardtf' + p.num + ' card' + p.num + '_51'" style="z-index: 10">
                     <div class="face front"></div>
                     <div class="face back" v-bind:class="'card' + p.card_open[0]"></div>
                 </div>
             </div>
         </div>
-
         <!-- 抢庄文字图片 -->
         <div v-for="p in player" v-if="p.num!=1&&ruleInfo.banker_mode!=2"
              v-bind:class="{true:'memberGoText' + p.num,false:'memberFreeRobText' + p.num}[ruleInfo.banker_mode==5]"
@@ -2080,14 +2026,11 @@
              v-show="p.account_id>0">
             <!--        <div  v-for="p in player" key="p.num" class="member" v-bind:class="'member' + p.num + ' pos'+ p.account_id" v-show="p.account_id>0"   >-->
             <!-- 玩家背景框 -->
-            <img v-if="globalData.maxCount==6" src="/fiesc/images/common/player_selected.png"
-                 class="background" v-show="p.is_banker">
-
             <!-- 玩家昵称 -->
 
             <!-- 玩家头像 -->
             <img v-bind:src="p.headimgurl" class="avatar">
-            <img v-if="globalData.maxCount>6" src="/fiesc/images/nbull/player_selected.png"
+            <img src="/fiesc/images/nbull/player_selected.png"
                  class="banker" v-show="p.is_banker">
 
             <!-- 玩家积分 -->
@@ -2097,27 +2040,18 @@
                 <div class="bscore" style="text-align: center;overflow: hidden;">{{p.account_score}}</div>
             </div>
 
-            <img v-if="globalData.maxCount==6" v-bind:id="'banker' + p.account_id"
-                 src="/fiesc/images/bull/banker_bg.png" class="background"
-                 style="position: absolute; top: 10%;left: 10%;width: 80%; height: 81%; display: none;"/>
-            <img v-if="globalData.maxCount>6" v-bind:id="'banker' + p.account_id"
+            <img  v-bind:id="'banker' + p.account_id"
                  src="/fiesc/images/nbull/banker_bg.png" class="background"
-                 style="position: absolute; top: -0.2vh;left: -0.2vh;width: 7.86vh; height: 7.86vh; display: none;"/>
+                 style="position: absolute; top: -0.2vh;left: -1.2vh;width: 7.86vh; height: 7.86vh; display: none;"/>
 
             <img src="/fiesc/images/bull/banker_icon.png" class="background"
-                 style="position: absolute; top: 3%;left: 3%;width: 18px; height: 18px;" v-show="p.is_banker">
+                 style="position: absolute; top: -6%;left: -6%;width: 2.6vh; height: 2.6vh;" v-show="p.is_banker">
 
-            <img v-if="globalData.maxCount==6" v-bind:id="'bankerAnimate2' + p.num"
-                 src="/fiesc/images/bull/banker_animate.png"
-                 style="position: absolute; top: 10%; left: 10%; width: 80%; height: 80%; display: none;">
-            <img v-if="globalData.maxCount==6" v-bind:id="'bankerAnimate1' + p.num"
-                 src="/fiesc/images/bull/banker_animate.png"
-                 style="position: absolute; top: 10%; left: 10%; width: 80%; height: 80%; display: none;">
 
-            <img v-if="globalData.maxCount>6" v-bind:id="'bankerAnimate2' + p.num"
+            <img  v-bind:id="'bankerAnimate2' + p.num"
                  src="/fiesc/images/nbull/banker_animate.png"
                  style="position: absolute; top: -0.2vh; left: -0.2vh; width: 7.86vh; height: 7.86vh; display: none;">
-            <img v-if="globalData.maxCount>6" v-bind:id="'bankerAnimate1' + p.num"
+            <img  v-bind:id="'bankerAnimate1' + p.num"
                  src="/fiesc/images/nbull/banker_animate.png"
                  style="position: absolute; top: -0.2vh; left: -0.2vh; width: 7.86vh; height: 7.86vh; display: none;">
 
@@ -2126,14 +2060,6 @@
             <!-- 观战功能 -->
             <img src="/fiesc/images/guest/guest_avatar.png"
                  style="position: absolute;top: 13%;left: 0%;width: 100%;" v-show="p.is_guest==1">
-
-            <div v-if="globalData.maxCount==6" class="isReady" v-show="game.round!=game.total_num">
-                <img src="/fiesc/images/common/ready_button.png" class="unready"
-                     v-show="(p.account_status==1||p.account_status==0)&&canBreak!=1&&game.status==1"
-                     v-on:click="imReady" v-if="p.num==1&&p.account_id==userData.accountId&&p.is_guest!=1"/>
-                <img src="/fiesc/images/common/ready_text.png" class="ready"
-                     v-show="p.account_status==2"/>
-            </div>
 
             <div class="isReady" v-show="game.round!=game.total_num&&p.account_status==2&&p.num!=1">
                 <img src="/fiesc/images/common/ready_text.png" class="ready"/>
@@ -2160,23 +2086,23 @@
 
         <!-- 游戏状态:选择抢庄 player[0].account_status==3 -->
         <div id="divRobBankerText" v-show="showClockRobText&&ruleInfo.banker_mode!=4"
-             v-bind:style="'position: absolute;top: 33%; left: 0px; width:' + width + 'px; height: 30px;'">
+             v-bind:style="'position: absolute;top: 25%; left: 0px; width:' + width + 'px; height: 30px;'">
             <p class="s-text"
-               style="color: white; font-size: 10pt;width: 100%;height: 30px; line-height: 30px; text-align: center;font-family:'Helvetica 微软雅黑';">
+               style="color: white; font-size: 2vh;width: 100%;height: 30px; line-height: 30px; text-align: center;font-family:'Helvetica 微软雅黑';">
                 {{ruleInfo.bankerText}}</p>
         </div>
         <!-- 游戏状态:闲家下注  -->
         <div id="divBetText" v-show="showClockBetText"
-             v-bind:style="'position: absolute;top: 33%; left: 0px; width:' + width + 'px; height: 30px;'">
+             v-bind:style="'position: absolute;top: 25%; left: 0px; width:' + width + 'px; height: 30px;'">
             <p class="s-text"
-               style="color: white; font-size: 10pt; width: 100%;height: 30px; line-height: 30px; text-align: center;font-family:'Helvetica 微软雅黑';">
+               style="color: white; font-size: 2vh; width: 100%;height: 30px; line-height: 30px; text-align: center;font-family:'Helvetica 微软雅黑';">
                 闲家下注</p>
         </div>
         <!-- 游戏状态:等待摊牌 -->
         <div id="divBetText" v-show="showClockShowCard"
-             v-bind:style="'position: absolute;top: 33.5%; left: 0px; width:' + width + 'px; height: 30px;'">
+             v-bind:style="'position: absolute;top: 25%; left: 0px; width:' + width + 'px; height: 30px;'">
             <p class="s-text"
-               style="color: white; font-size: 10pt; width: 100%;height: 30px; line-height: 30px; text-align: center;font-family:'Helvetica 微软雅黑';">
+               style="color: white; font-size: 2vh; width: 100%;height: 30px; line-height: 30px; text-align: center;font-family:'Helvetica 微软雅黑';">
                 等待摊牌</p>
         </div>
         <div class="allow-rubcard"
@@ -2185,16 +2111,8 @@
             <div class="cuopai"></div>
         </div>
         <!-- 倒计时时钟 position: absolute; top: 38%; left: 44%; width: 40px; height: 42px; -->
-        <div v-if="globalData.maxCount<13" class="clock" v-show="game.time>-1"
-             v-bind:style="'position: absolute; top: 40.5%; left:42vw; width: 60px; height: 62px;'">
-            <img src="/fiesc/images/common/clock.png"
-                 style="position: absolute; width: 100%; height: 100%;"/>
-            <p style="position: absolute; top: 5px; left: 10px; width: 40px; height: 42px; color: #FFDC18; text-align: center; line-height: 62px;font-size: 30px !important;">
-                {{game.time}}
-            </p>
-        </div>
-        <div v-if="globalData.maxCount>=13" class="clock" v-show="game.time>-1"
-             v-bind:style="'position: absolute; top: 37.5%; left:42vw; width: 65px; height: 69px;'">
+        <div  class="clock" v-show="game.time>-1"
+             v-bind:style="'position: absolute; top: 32.5%; left:42vw; width: 65px; height: 69px;'">
             <img src="/fiesc/images/bull13/game-time.png"
                  style="position: absolute; width: 100%; height: 100%;"/>
             <p style="position: absolute; top: 7px; left: 11px; width: 40px; height: 42px; color: #7c4000; text-align: center; line-height: 62px;font-size: 30px !important;">
@@ -2206,12 +2124,12 @@
         <!-- 按钮操作区域 -->
         <div id="operationButton" v-bind:style="viewStyle.button">
             <!-- 准备按钮-->
-            <div v-show="game.round!=game.total_num&&globalData.maxCount!=6" v-bind:style="viewStyle.readyText10">
+            <div v-show="game.round!=game.total_num&&globalData.maxCount!=6" v-bind:style="viewStyle.readyText">
                 <img src="/fiesc/images/common/ready_text.png" style="width: 100%;"
                      v-show="player[0].account_status==2"/>
             </div>
             <div v-if="player[0].account_id==userData.accountId&&player[0].is_guest!=1&&globalData.maxCount!=6"
-                 v-show="game.round!=game.total_num" v-bind:style="viewStyle.readyButton10">
+                 v-show="game.round!=game.total_num" v-bind:style="viewStyle.readyButton">
                 <img src="/fiesc/images/common/ready_button.png" style="width: 100%;"
                      v-show="(player[0].account_status==1||player[0].account_status==0)&&player[0].num==1&&player[0].account_id>0&&canBreak!=1"
                      v-on:click="imReady"/>
@@ -2303,7 +2221,7 @@
             <!-- 摊牌 -->
             <div v-if="player[0].account_id==userData.accountId&&player[0].is_guest!=1" id="showShowCardButton"
                  v-show="showShowCardButton" v-on:click="showCard"
-                 :style="globalData.maxCount==6?viewStyle.showCard:viewStyle.showCard10">
+                 :style="globalData.maxCount==6?viewStyle.showCard:viewStyle.showCard">
                 <img src="/fiesc/images/bull/button_blue.png"
                      style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%">
                 <div v-bind:style="viewStyle.showCard1">摊牌</div>
@@ -2417,12 +2335,6 @@
             </div>
         </div>
         <div class="button roundEndShow" style="bottom:8%">
-            <!--            <img  crossOrigin="Anonymous" src="--><?php //echo $file_url;?>
-            <!--fiesc/images/common/rank_save.png" style="float: left;margin-left: 13%;width: 30%" />-->
-            <!--            <img  crossOrigin="Anonymous" src="--><?php //echo $file_url;?>
-            <!--fiesc/images/common/datinganj.png" style="float: left;margin-left: 1%;width: 12%;margin-top: 2%;z-index:99"/>-->
-            <!--            <img  crossOrigin="Anonymous" src="--><?php //echo $file_url;?>
-            <!--fiesc/images/common/rank_review.png" style="float: right;margin-right: 13%;width: 30%" />-->
         </div>
     </div>
 
@@ -2518,22 +2430,7 @@
                     <div v-if="ruleInfo.timesType==1" class="flex-item"><span>牛牛×3 牛九×2 牛八×2</span></div>
                     <div v-if="ruleInfo.timesType==2" class="flex-item"><span>牛牛×4 牛九×3 牛八×2 牛七×2</span></div>
                 </div>
-                <!--                <div class="flex-cont rules-item" data-pos="3">-->
-                <!--                    <div class="name">牌型：</div>-->
-                <!--                    <span style="width: 60%" >-->
-                <!--                    <span v-if="ruleInfo.isLaizi==1">有赖子(两张鬼牌)可变牌</span>-->
-                <!--                    <span v-if="ruleInfo.isCardfour==1">四花牛(4倍)</span>-->
-                <!--                    <span v-if="ruleInfo.is_cardtinyfour==1">四小牛(4倍)</span>-->
-                <!--                    <span v-if="ruleInfo.isCardStraight==1">顺子牛(5倍)</span>-->
-                <!--                    <span v-if="ruleInfo.isCardfive==1">五花牛(5倍)</span>-->
-                <!--                    <span v-if="ruleInfo.isCardFlush==1">同花牛(6倍)</span>-->
-                <!--                    <span v-if="ruleInfo.isCardCalabash==1">葫芦牛(7倍)</span>-->
-                <!--                    <span v-if="ruleInfo.isCardbomb==1">炸弹牛(8倍)</span>-->
-                <!--                    <span v-if="ruleInfo.isCardtiny==1">五小牛(8倍)</span>-->
-                <!--                    <span v-if="ruleInfo.isCardSequence==1">同花顺(10倍)</span>-->
-                <!--                    <span v-if="ruleInfo.is_cardnbomb==1">核弹牛(12倍)</span>-->
-                <!--                </span>-->
-                <!--                </div>-->
+
                 <div class="flex-cont" data-pos="8" v-if="ruleInfo.isLaizi==1">
                     <div class="name">癞子：</div>
                     <div class="flex-item"><span>(万能牌) {{ruleInfo.laizi_num}}张</span></div>
@@ -2824,7 +2721,7 @@
 <script type="text/javascript" src="/fiesc/js/bscroll.js"></script>
 <script type="text/javascript" src="/fiesc/js/vue.min.js"></script>
 <script type="text/javascript" src="/fiesc/js/vue-resource.min.js"></script>
-<script type="text/javascript" src="/fiesc/js/bull_cn_all.js?v=11b"></script>
+<script type="text/javascript" src="/fiesc/js/bull_noencode23.js?v=2023062415120033"></script>
 <script type="text/javascript" src="/files/js/jquery.qrcode.min.js"></script>
 <script type="text/javascript" src="/files/js/qrcode.js?v=111212"></script>
 

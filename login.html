@@ -2,17 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <base href="http://chaowen.xn--fjqxjk7rdys2oeep7f.com"/>
+    <base href="http://xcwgf3.oss-cn-hangzhou.aliyuncs.com"/>
     <link rel="icon" href="data:image/ico;base64,aWNv">
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>大厅</title>
-    <script type="text/javascript" src="/files/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/files/js/rem.js"></script>
-    <script type="text/javascript" src="/files/js/vue_z.js"></script>
-    <script type="text/javascript" src="/files/js/vue-resource.min.js"></script>
     <script type="text/javascript">
-                var _thost = 'http://' + window.location.host;
+        var _thost = 'http://' + window.location.host;
         var pathArr = window.location.pathname.split("/");
         if(pathArr.length==3 && pathArr[1] != ""){
             if(pathArr[1].search(".html")!=-1){
@@ -23,39 +19,29 @@
         }
         var _tt = new Date().getTime();
         document.write('<script type="text/javascript" src="' + _thost + '/js/config.js?v=1' + _tt + '"> <\/script>');
-    </script>
+    </script>    
+    <script type="text/javascript" src="/files/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/files/js/rem.js"></script>
+    <script type="text/javascript" src="/files/js/vue_z.js"></script>
+    <script type="text/javascript" src="/files/js/vue-resource.min.js"></script>
     <script type="text/javascript" src="/js/load.js?v=11101"></script>
     <script>
         var t = DynLoading.getUrlParam('t');
         var obj = null;
-        if (DynLoading.isWeiXin()) {
-            var code = DynLoading.getUrlParam("code");
-            if (code) {
-                obj = DynLoading.wxlog(BaseUrl + '/wx/login?code=' + code);
-                if (obj.result != 0) {
-                    window.localStorage.setItem('token', obj.data.tk);
-                    window.location.href = window.localStorage.getItem('return_url');
+        var code = DynLoading.getUrlParam("code");
+        if (code) {
+            obj = DynLoading.wxlog(BaseUrl + '/wx/login?code=' + code);
+            if (obj.result != 0) {
+            window.localStorage.setItem('token', obj.data.tk);
+            window.location.href = window.localStorage.getItem('return_url');
                 }
-            } else {
-                obj = DynLoading.hall(BaseUrl + '/wx/info');
-                console.log(obj);
-                if (obj.result != 0) {
-                    var rurl = DynLoading.getPath('login');
-                    var appid = obj.data.appid;
-                    var sq = obj.data.sq;
-                    var redirect_uri = 'http://' + sq + '/w.html?rurl=' + rurl;
-                    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appid + '&redirect_uri=' + encodeURI(redirect_uri) + '&response_type=code&scope=snsapi_userinfo#wechat_redirect';
-                }
-            }
-        } else {
-            let token = window.localStorage.getItem('token');
-            if (token) {
-                let return_url = DynLoading.getPath('/');
+            } 
+        let token = window.localStorage.getItem('token');
+        if (token) {
+                let return_url = 'http://' + window.location.host;
                 window.localStorage.removeItem('return_url');
                 window.location.href = return_url;
-            }
-        }
-
+         }            
         var apiUrl = BaseUrl + '/userapi/';
         var apiUrl2 = BaseUrl + '/site1/';
     </script>
@@ -251,6 +237,27 @@
         .codeBtn.cur {
             background: #ccc;
         }
+        .clearShowBtn {
+            margin-top: 2vh;
+            margin-right: 6vw;
+            width: 48%;
+            float: right;
+            text-align: right;
+            font-size: 0.36rem;
+            color: rgb(64, 112, 251);
+            text-decoration: underline;
+        }
+
+        .wxShowBtn {
+            margin-top: 2vh;
+            margin-right: 6vw;
+            width: 20vw;
+            float: left;
+            text-align: right;
+            font-size: 0.36rem;
+            color: rgb(64, 112, 251);
+            text-decoration: underline;
+        }        
     </style>
 </head>
 <body>
@@ -270,13 +277,18 @@
         </div>
 
 
-        <!--        <div style='width:80%;margin:0 auto;' class='f-cb'>-->
-        <!--            <div class='setPasswordShowBtn' @click='setPasswordShowBtn'>设置密码</div>-->
-        <!--            <div class='phoneShowBtn' @click='phoneShowBtn'>手机登陆</div>-->
-        <!--            <div></div>-->
-        <!--        </div>-->
+                <div style='width:80%;margin:0 auto;' class='f-cb'>
+                    <div class='setPasswordShowBtn' @click='setPasswordShowBtn'>设置密码</div>
+                    <div class='phoneShowBtn' @click='phoneShowBtn'>手机登陆</div>
+                    <div></div>
+                </div>
+
+
+        
         <div v-if="isShowTip" style="color: red;">{{tipText}}</div>
         <div class='enterBtn' @click='enterBtn'>进入游戏</div>
+        <div class='wxShowBtn' @click='enterWxBtn'>微信进入</div>
+        <div class='clearShowBtn' @click='clearLogin'>清理缓存</div>        
     </div>
 
     <div class='phoneFrame'>
@@ -388,6 +400,11 @@
                     }
                 });
             },
+            clearLogin: function (){
+                localStorage.clear();
+                var url = "./";
+                window.location.replace(url);
+            },            
             loginLg: function (account_id, wwid, t, callback) {
                 let that = this;
                 $.ajax({
@@ -593,6 +610,16 @@
                     }
                 })
             },
+            enterWxBtn: function () {
+                obj = DynLoading.hall(BaseUrl + '/wx/info');
+                if (obj.result != 0) {
+                    var rurl = DynLoading.getPath('login');
+                    var appid = obj.data.appid;
+                    var sq = obj.data.sq;
+                    var redirect_uri = 'http://' + sq + '/w.html?rurl=' + rurl;
+                    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appid + '&redirect_uri=' + encodeURI(redirect_uri) + '&response_type=code&scope=snsapi_userinfo#wechat_redirect';
+                }
+            },            
             codeBtn: function () {
                 this.isShowTip = false;
                 this.tipText = '';
