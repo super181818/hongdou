@@ -1,5 +1,5 @@
 /*-------config start-------*/
-var _wip = 'cdn.panguh5.com';  
+var _wip = '180.188.18.186';  
 var _port = '1790';  
 /*---------config end---------*/
 
@@ -7,4 +7,4 @@ var BaseUrl = 'http://' + _wip+':'+_port;
 var ResourceUrl = '/';
 var Suffix = '.html';
 var _isTx = 1;
-var _wport = '10000' 
+var _wport = '10001' 
